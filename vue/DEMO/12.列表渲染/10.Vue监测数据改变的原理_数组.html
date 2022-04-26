@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Vue监视数据改变的原理</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+
+    <h1>地址:{{person.address}}</h1>
+    <h2>名称:{{person.name}}</h2>
+    <hr>
+    <h2>爱好</h2>
+    <ul>
+      <li v-for="(h,index) in person.hobby" :key="index">
+        <h2>{{h}}</h2>
+      </li>
+    </ul>
+    <hr>
+    <ul>
+      <li v-for="(f,index) in person.friends" :key="index">
+        <h2>朋友名称:{{f.name}}</h2>
+        <h2>朋友住址:{{f.address}}</h2>
+      </li>
+    </ul>
+  </div>
+</body>
+<script>
+  Vue.config.productionTip = false
+  const vm = new Vue({
+    el: '#root',
+    data: {
+      person: { 
+        name: 'WSharkCoder',
+        address: 'BeiJing',
+        hobby: ['唱', '跳', 'RAP', '篮球'],
+        friends: [{
+          name: '张三',
+          address: 'ShangHai'
+        }]
+      }
+    }
+  })
+</script>
+
+</html>

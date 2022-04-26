@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../js/vue.js"></script>
+  <title>el与data的两种写法</title>
+</head>
+
+<body>
+  
+  <div id="first-el-root">
+    <h1>Hello,{{name}}</h1>
+  </div>
+  <div id="second-el-root">
+    <h1>Hello,{{name}}</h1>
+  </div>
+  <div id="first-data-root">
+    <h1>Hello,{{name}}</h1>
+  </div>
+  <div id="second-data-root">
+    <h1>Hello,{{name}}</h1>
+  </div>
+  <script>
+    Vue.config.productionTip = false
+    // el-写法一
+    new Vue({
+      el: '#first-el-root',
+      data: {
+        name: 'WSharkCoder'
+      }
+    })
+    // el-写法二
+    const v = new Vue({
+      data: {
+        name: 'WSharkCoder'
+      }
+    })
+    // 延时1秒后挂载
+    setTimeout(() => {
+      v.$mount('#second-el-root')
+    }, 1000)
+
+    // data-写法一
+    new Vue({
+      el: '#first-data-root',
+      data: {
+        name: 'WSharkCoder'
+      }
+    })
+    // data-写法二
+    new Vue({
+      el: '#second-data-root',
+      data: function () {
+        console.log(this) //此处的this是Vue实例对象
+        return {
+          name: 'WSharkCoder'
+        }
+      }
+    })
+
+  
+  </script>
+</body>
+
+</html>

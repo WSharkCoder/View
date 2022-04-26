@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../js/vue.js"></script>
+  <title>深度监视属性</title>
+</head>
+
+
+<body>
+  <div id="root"> 
+    <h1>今天天气很{{info}}</h1>
+    <button @click="changeWeather">切换天气</button>
+    <hr>
+    <h3>a的值是{{numbers.a}}</h3>
+    <button @click="addA">A++</button>
+    <hr>
+    <h3>b的值是{{numbers.b}}</h3>
+    <button @click="addB">B++</button>
+  </div>
+  <script>
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        isHot: true,
+        numbers: {
+          a: 1,
+          b: 1
+        }
+      },
+      computed: {
+        info() {
+          return this.isHot ? '炎日' : '酷爽'
+        }
+      },
+      methods: {
+        changeWeather() {
+          this.isHot = !this.isHot
+        },
+        addA() {
+          this.numbers.a++;
+        },
+        addB() {
+          this.numbers.b++;
+        }
+
+      },
+      watch: {
+        isHot: {
+          //初始化时让handler调用一下
+          immediate: true,
+          //handler什么时候调用？当isHot发生改变时
+          handler(newValue, oldValue) {
+            console.log('isHot被修改了', newValue, oldValue)
+          }
+        },
+        // 监视多级结构中某个属性的变化
+        // 'numbers.a': {
+        //   handler(newValue, oldValue) {
+        //     console.log('A改变了')
+        //   }
+        // }
+        
+        //监视多级结构中所有属性的变化
+        numbers:{
+          //深度检测
+          deep:true,
+          handler(newValue,oldValue){
+            console.log('numbers'+newValue+'-'+oldValue)
+            
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

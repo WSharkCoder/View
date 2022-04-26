@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Vue监视数据改变的原理</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+
+    <h1>地址:{{address}}</h1>
+    <h1>Leader:{{leader}}</h1>
+    <h2>名称:{{person.name}}</h2>
+    <button @click="addSex">添加一个性别属性,默认值男</button>
+    <h2 v-if="person.sex">性别:{{person.sex}}</h2>
+    <hr>
+    <ul>
+      <li v-for="(f,index) in person.friends" :key="index">
+        <h2>朋友名称:{{f.name}}</h2>
+        <h2>朋友住址:{{f.address}}</h2>
+      </li>
+    </ul>
+  </div>
+</body>
+<script>
+  Vue.config.productionTip = false
+  const vm = new Vue({
+    el: '#root',
+    data: {
+      address: 'BeiJing',
+      person: {
+        name: 'WSharkCoder',
+        friends: [{
+          name: '张三',
+          address: 'ShangHai'
+        }]
+      }
+    },
+    methods: {
+      addSex() {
+        // set添加属性
+        // this.$set(this.person, 'sex', '男') //方式一
+        Vue.set(this.person, 'sex', '男') //方式二
+      }
+    }
+  })
+
+  // Vue set的两种方式
+  //  Vue.set(vm._data.person,'sex','男')
+  // vm.$set(vm._data.person,'sex','男')
+</script>
+
+</html>

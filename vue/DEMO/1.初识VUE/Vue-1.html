@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <script src="../js/vue.js"></script>
+  <title>初始Vue</title>
+</head>
+
+<body>
+  <!--  
+    初始Vue总结:
+      1. 想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象
+      2. root容器里的代码符合HTML规范，只不过混入了一些特殊的 Vue 代码
+      3. root容器里的代码被称为【Vue模板】
+      4. Vue实例和容器必须是一对一关系,无论实际编写过程中Vue实例和容器是一对多还是多对一，容器和实例首次绑定后将不覆盖.
+      5. {{xxx}}中xxx要写Js表达式，且xxx可以自动读取到data中的所有属性
+      6. 一旦data中数据发生变化，那么模板中用到数据的地方也会自动更新
+
+    双花括号中必须是Js表达式即:{{JS表达式}}
+    + 什么是JS表达式和JS代码?
+      1.表达式： 一个表达式会生成一个值，可以放在任何一个需要值的地方
+        a
+        a+b
+        demo(1)
+        x===y ?'a':'a'
+      2.Js语句 
+        if(){}
+        for()
+
+  -->
+  <!-- 
+    vue.js 是开发版Vue，其中包含大量Vue提示信息，以便初学者使用.
+    vue.min.js 是发布版Vue,其中不包含Vue提示信息，更加精简.
+    Console 控制台
+    ## VUE生产提示
+    You are running Vue in development mode.
+    Make sure to turn on production mode when deploying for production.
+    See more tips at https://vuejs.org/guide/deployment.html
+    
+   ## Vue => 构造函数
+    Vue
+    ƒ Vue (options) {
+    if (!(this instanceof Vue)
+    ) {
+    warn('Vue is a constructor and should be called with the `new` keyword');
+    }
+    this._init(options);
+    }
+   -->
+
+  <!-- 容器 -->
+  <div id="root">
+    <h1>Hello,{{name.toUpperCase()}}</h1>
+  </div>
+  <script>
+    //阻止 Vue 在启动时生成生产提示
+    Vue.config.productionTip = false
+
+    //创建Vue实例
+    const x = new Vue({
+      el: '#root', //el用于指定当前Vue实例为哪个容器服务，值通常为css选择器字符串
+      data: { //data中用于存储数据，数据供el所指定的容器去使用
+        name: 'WSharkCoder'
+      }
+    })
+  </script>
+</body>
+
+</html>
