@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>组件嵌套</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+
+  <div id="root">
+    <app></app>
+  </div>
+
+</body>
+<script>
+  Vue.config.productionTip = false
+
+  // 创建student组件
+  const student = Vue.extend({
+    // name配置项
+    name: 'student',
+    template: `
+    <div>
+      <h2>学校名称:{{studentName}}</h2>
+      <h2>学校地址:{{age}}</h2>
+    </div>
+    `,
+    data() {
+      return {
+        studentName: 'WSharkCoder',
+        age: 22
+      }
+    }
+  })
+  //定义Hello组件
+  const hello = Vue.extend({
+    name: 'hello',
+    template: `
+    <h1>{{msg}}</h1>
+    `,
+    data() {
+      return {
+        msg: 'Hello!!'
+      }
+    }
+
+  })
+  // 创建school组件
+  const school = Vue.extend({
+    // name配置项
+    name: 'school',
+    template: `
+    <div>
+      <h2>学校名称:{{schoolName}}</h2>
+      <h2>学校地址:{{address}}</h2>
+      <student></student>
+      <button @click="showName"> 点我提示学校信息 </button>
+    </div>
+    `,
+    data() {
+      return {
+        schoolName: 'WUST',
+        address: '武汉'
+      }
+    },
+    components: {
+      student
+    },
+    methods: {
+      showName() {
+        alert(this.schoolName)
+      }
+    }
+  })
+
+  //定义app组件
+  const app = Vue.extend({
+    template: `
+    <div>
+      <hello></hello>
+      <school></school>
+    </div>
+  `,
+    components: {
+      school,
+      hello
+    }
+  })
+  // 创建vm
+  new Vue({
+    el: '#root',
+    // 注册组件（局部注册）
+    components: {
+      app
+    }
+  })
+</script>
+
+</html>

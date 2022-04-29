@@ -8,6 +8,6 @@
 /
 +base 		#基本知识
 +vue  		#Vue框架相关
-++DEMO		#初学Vue例子
+++Learn-Vue	#初学Vue例子
 ```
 
